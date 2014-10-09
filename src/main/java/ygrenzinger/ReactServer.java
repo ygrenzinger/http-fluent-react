@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import ygrenzinger.helpers.ReactHelper;
 
 /**
  * Created by ygrenzinger on 08/10/2014.
@@ -38,7 +39,8 @@ public class ReactServer {
         Object jsRendering = reactServer.js();
         new WebServer(routes -> routes
                 .get("/hello/:name", (context, name) -> "Hello, " + name.toUpperCase() + "!")
-                .get("/react", Model.of("name", jsRendering))
-        ).start(8000);
+                .get("/react", Model.of("component", jsRendering))
+                .registerHandleBarsHelper(ReactHelper.class)
+        ).start(8080);
     }
 }
