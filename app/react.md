@@ -1,4 +1,5 @@
 ---
 layout: default
+styles: [app.css]
 ---
-Hello [[renderReact component]]
+[[renderReact component]]

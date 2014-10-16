@@ -1,0 +1,85 @@
+
+/* app css stylesheet */
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+.stocks {
+    margin: 0 auto;
+}
+
+.stock {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 2px;
+    width: 180px;
+}
+
+.title {
+    max-width: 175px;
+    text-align: center;
+    font-size: 0.8em;
+    overflow: hidden;
+    white-space: nowrap; /* Don't forget this one */
+    text-overflow: ellipsis;
+}
+
+.symbol {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    font-weight:bold;
+}
+
+.price {
+    display: inline-block;
+    width: 39%;
+    text-align: center;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.variation {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+}
+
+.stock.up {
+    background-color: #64FF64;
+}
+.stock.down {
+    background-color: #FF6464;
+}

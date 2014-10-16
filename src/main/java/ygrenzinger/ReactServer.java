@@ -70,13 +70,13 @@ public class ReactServer {
 
         engine.eval("var ReactServer = Java.type('ygrenzinger.ReactServer');");
         engine.eval("var renderReact = function(values, symbol){ " +
-                "return React.renderComponentToString(StocksComponent({stocks: values, orderBy:symbol}))" +
+                "return React.renderComponentToString(StocksComponent({stocks: JSON.parse(values), orderBy:symbol}))" +
                 "};");
         engine.eval("var print = function(value) { console.log(value) };");
 
         Invocable invocable = (Invocable) engine;
-        invocable.invokeFunction("print", stocks);
-        Object result = invocable.invokeFunction("renderReact", stocks, "symbol");
+        invocable.invokeFunction("print", "test");
+        Object result = invocable.invokeFunction("renderReact", getJsonSp500(), "symbol");
         return result.toString();
     }
 
