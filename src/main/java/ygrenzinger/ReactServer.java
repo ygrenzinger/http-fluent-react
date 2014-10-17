@@ -5,11 +5,13 @@ import net.codestory.http.templating.Model;
 import org.apache.commons.io.IOUtils;
 import ygrenzinger.helpers.ReactHelper;
 import ygrenzinger.models.Stock;
+import ygrenzinger.models.StockMarketIndex;
 import ygrenzinger.services.JsonMapper;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -24,30 +26,31 @@ public class ReactServer {
 
     private static JsonMapper jsonMapper = new JsonMapper();
 
-    private static List<Stock> stocks = new ArrayList<>();
+    private final StockMarketIndex stockMarketIndex;
 
     public ReactServer() {
-        loadJsonSp500();
+        stockMarketIndex = new StockMarketIndex(loadJsonSp500());
     }
 
-    public static void loadJsonSp500() {
+    private List<Stock> loadJsonSp500() {
 
         try {
             InputStream dataStream = ReactServer.class.getClassLoader().getResourceAsStream("sp500.json");
             String data = IOUtils.toString(dataStream, Charset.forName("UTF-8"));
-            stocks = jsonMapper.convertJsonToStocks(data);
+            return jsonMapper.convertJsonToStocks(data);
+
         } catch (IOException e) {
             e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
-    public static String getJsonSp500() {
-        return jsonMapper.convertStocksToJson(stocks);
+    public String getJsonSp500() {
+        return jsonMapper.convertStocksToJson(stockMarketIndex.stocks());
     }
 
-    private Object js() throws Exception {
+    private void initJS() throws ScriptException, IOException {
         engine.eval("var global = this;");
-
         InputStream reactSourceStream =
                 ReactServer.class.getResourceAsStream("/META-INF/resources/webjars/react/0.11.2/react.min.js");
         String reactScript = IOUtils.toString(reactSourceStream, Charset.forName("UTF-8"));
@@ -73,19 +76,28 @@ public class ReactServer {
                 "return React.renderComponentToString(StocksComponent({stocks: JSON.parse(values), orderBy:symbol}))" +
                 "};");
         engine.eval("var print = function(value) { console.log(value) };");
+    }
 
-        Invocable invocable = (Invocable) engine;
-        invocable.invokeFunction("print", "test");
-        Object result = invocable.invokeFunction("renderReact", getJsonSp500(), "symbol");
-        return result.toString();
+    private Object renderJS() {
+        try {
+            Invocable invocable = (Invocable) engine;
+            invocable.invokeFunction("print", "test");
+            String data = getJsonSp500();
+            Object result = invocable.invokeFunction("renderReact", data, "symbol");
+            return result.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
     }
 
     public static void main(String[] args) throws Exception {
         ReactServer reactServer = new ReactServer();
-        Object jsRendering = reactServer.js();
+        reactServer.initJS();
         new WebServer(routes -> routes
                 .get("/hello/:name", (context, name) -> "Hello, " + name.toUpperCase() + "!")
-                .get("/react", Model.of("component", jsRendering))
+                .get("/react", (context) -> Model.of("component", reactServer.renderJS()))
+                .get("/sp500", (context) -> reactServer.getJsonSp500())
                 .registerHandleBarsHelper(ReactHelper.class)
         ).start(8080);
     }
