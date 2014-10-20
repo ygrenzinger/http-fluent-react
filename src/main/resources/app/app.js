@@ -7,7 +7,7 @@ var launchPeriodicRefresh = function() {
         $.get('/stocks', function( data ) {
             renderStocks(data, 'symbol', $('#stock-market').get(0));
         });
-    }, 1000);
+    }, 400);
 };
 
 var stopPeriodicRefresh = function() {

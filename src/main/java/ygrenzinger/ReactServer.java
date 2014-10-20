@@ -25,7 +25,7 @@ public class ReactServer {
 
     private final StockMarketIndex stockMarketIndex;
 
-    public static int numberOfStocksToDisplay = 100;
+    public static int numberOfStocksToDisplay = 150;
 
     public ReactServer() {
         stockMarketIndex = new StockMarketIndex(loadJsonSp500());
@@ -48,7 +48,7 @@ public class ReactServer {
         if (numberOfStocks > 500) {
             numberOfStocks = 500;
         }
-        return jsonMapper.convertStocksToJson(stockMarketIndex.stocks().subList(0, numberOfStocks));
+        return jsonMapper.convertStocksToJson(stockMarketIndex.stocks().subList(0, numberOfStocks-1));
     }
 
     private void loadAndEvalScript(String src) throws IOException, ScriptException {
@@ -86,8 +86,7 @@ public class ReactServer {
         ReactServer reactServer = new ReactServer();
         reactServer.initJS();
         new WebServer(routes -> routes
-                .get("/hello/:name", (context, name) -> "Hello, " + name.toUpperCase() + "!")
-                .get("/stock-market", (context) -> Model.of("component", reactServer.renderJS()))
+                .get("/", (context) -> Model.of("component", reactServer.renderJS()))
                 .get("/stocks", (context) -> reactServer.getJsonStocks(numberOfStocksToDisplay))
                 .registerHandleBarsHelper(ReactHelper.class)
         ).start(8080);

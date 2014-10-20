@@ -22,7 +22,7 @@ public class StockMarketIndex {
         this.stocks = _stocks;
         Random random = new Random();
         stocks.parallelStream().forEach(stock -> stock.setPrice(random.nextDouble() * 100.0));
-        scheduledExecutorService.scheduleAtFixedRate(new UpdatingStockRunnable(), 1, 1, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(new UpdatingStockRunnable(), 100, 100, TimeUnit.MILLISECONDS);
     }
 
 
@@ -50,7 +50,8 @@ public class StockMarketIndex {
 
         @Override
         public void run() {
-            stocks.parallelStream().forEach(this::updateStockPrice);
+            Random random = new Random();
+            random.ints(10, 0, stocks.size()).parallel().forEach(i -> updateStockPrice(stocks.get(i)));
         }
     }
 
