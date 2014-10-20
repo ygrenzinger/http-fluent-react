@@ -67,14 +67,15 @@ public class ReactServer {
         engine.eval(nashornUtil);
 
         InputStream reactComponentStream =
-                ReactServer.class.getResourceAsStream("/react/reactComponents.js");
+                ReactServer.class.getResourceAsStream("/react/compiled/reactComponents.js");
         String reactComponent = IOUtils.toString(reactComponentStream, Charset.forName("UTF-8"));
         engine.eval(reactComponent);
 
-        engine.eval("var ReactServer = Java.type('ygrenzinger.ReactServer');");
-        engine.eval("var renderReact = function(values, symbol){ " +
-                "return React.renderComponentToString(StocksComponent({stocks: JSON.parse(values), orderBy:symbol}))" +
-                "};");
+        InputStream appStream =
+                ReactServer.class.getResourceAsStream("/app/app.js");
+        String app = IOUtils.toString(appStream, Charset.forName("UTF-8"));
+        engine.eval(app);
+
         engine.eval("var print = function(value) { console.log(value) };");
     }
 
@@ -96,7 +97,7 @@ public class ReactServer {
         reactServer.initJS();
         new WebServer(routes -> routes
                 .get("/hello/:name", (context, name) -> "Hello, " + name.toUpperCase() + "!")
-                .get("/react", (context) -> Model.of("component", reactServer.renderJS()))
+                .get("/stock-market", (context) -> Model.of("component", reactServer.renderJS()))
                 .get("/sp500", (context) -> reactServer.getJsonSp500())
                 .registerHandleBarsHelper(ReactHelper.class)
         ).start(8080);

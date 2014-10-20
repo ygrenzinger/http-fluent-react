@@ -37,7 +37,7 @@ public class StockMarketIndex {
         private void updateStockPrice(Stock stock) {
             Random random = new Random();
             stock.setVariation(Math.round(random.nextDouble()*100.0)/100.0);
-            if (random.nextInt(1) == 0) {
+            if (random.nextInt(2) == 0) {
                 stock.setVariation(-stock.getVariation());
             }
 
