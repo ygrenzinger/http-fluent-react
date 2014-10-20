@@ -3,7 +3,7 @@ http-fluent-react
 
 # Isomorphic Javascript on Java platform
 
-Isomorphic Javascript is a concept where you use the same code for rendering the UI server side or client side. It can be a great solution for keeping great SEO or great perf when the page is displayed for the first page.
+[Isomorphic Javascript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) is a concept where you use the same code for rendering the UI server side or client side. It can be a great solution for keeping great SEO or great perf when the page is displayed for the first time.
 
 ## Techno for his proof of concept 
 
