@@ -18,15 +18,14 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ygrenzinger on 08/10/2014.
- */
 public class ReactServer {
     private static ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 
     private static JsonMapper jsonMapper = new JsonMapper();
 
     private final StockMarketIndex stockMarketIndex;
+
+    public static int numberOfStocksToDisplay = 100;
 
     public ReactServer() {
         stockMarketIndex = new StockMarketIndex(loadJsonSp500());
@@ -45,36 +44,27 @@ public class ReactServer {
         }
     }
 
-    public String getJsonSp500() {
-        return jsonMapper.convertStocksToJson(stockMarketIndex.stocks());
+    public String getJsonStocks(int numberOfStocks) {
+        if (numberOfStocks > 500) {
+            numberOfStocks = 500;
+        }
+        return jsonMapper.convertStocksToJson(stockMarketIndex.stocks().subList(0, numberOfStocks));
+    }
+
+    private void loadAndEvalScript(String src) throws IOException, ScriptException {
+        InputStream reactSourceStream =
+                ReactServer.class.getResourceAsStream(src);
+        String reactScript = IOUtils.toString(reactSourceStream, Charset.forName("UTF-8"));
+        engine.eval(reactScript);
     }
 
     private void initJS() throws ScriptException, IOException {
         engine.eval("var global = this;");
-        InputStream reactSourceStream =
-                ReactServer.class.getResourceAsStream("/META-INF/resources/webjars/react/0.11.2/react.min.js");
-        String reactScript = IOUtils.toString(reactSourceStream, Charset.forName("UTF-8"));
-        engine.eval(reactScript);
 
-        InputStream lodashSourceStream =
-                ReactServer.class.getResourceAsStream("/META-INF/resources/webjars/lodash/2.4.1-6/lodash.min.js");
-        String lodashScript = IOUtils.toString(lodashSourceStream, Charset.forName("UTF-8"));
-        engine.eval(lodashScript);
-
-        InputStream nashornUtilsStream =
-                ReactServer.class.getResourceAsStream("/nashorn/utils.js");
-        String nashornUtil = IOUtils.toString(nashornUtilsStream, Charset.forName("UTF-8"));
-        engine.eval(nashornUtil);
-
-        InputStream reactComponentStream =
-                ReactServer.class.getResourceAsStream("/react/compiled/reactComponents.js");
-        String reactComponent = IOUtils.toString(reactComponentStream, Charset.forName("UTF-8"));
-        engine.eval(reactComponent);
-
-        InputStream appStream =
-                ReactServer.class.getResourceAsStream("/app/app.js");
-        String app = IOUtils.toString(appStream, Charset.forName("UTF-8"));
-        engine.eval(app);
+        loadAndEvalScript("/META-INF/resources/webjars/react/0.11.2/react.min.js");
+        loadAndEvalScript("/META-INF/resources/webjars/lodash/2.4.1-6/lodash.min.js");
+        loadAndEvalScript("/nashorn/utils.js");
+        loadAndEvalScript("/app/react/compiled/reactComponents.js");
 
         engine.eval("var print = function(value) { console.log(value) };");
     }
@@ -82,9 +72,9 @@ public class ReactServer {
     private Object renderJS() {
         try {
             Invocable invocable = (Invocable) engine;
-            invocable.invokeFunction("print", "test");
-            String data = getJsonSp500();
-            Object result = invocable.invokeFunction("renderReact", data, "symbol");
+            invocable.invokeFunction("print", "rendering react on the server");
+            String data = getJsonStocks(numberOfStocksToDisplay);
+            Object result = invocable.invokeFunction("renderStocks", data, "symbol", null);
             return result.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +88,7 @@ public class ReactServer {
         new WebServer(routes -> routes
                 .get("/hello/:name", (context, name) -> "Hello, " + name.toUpperCase() + "!")
                 .get("/stock-market", (context) -> Model.of("component", reactServer.renderJS()))
-                .get("/sp500", (context) -> reactServer.getJsonSp500())
+                .get("/stocks", (context) -> reactServer.getJsonStocks(numberOfStocksToDisplay))
                 .registerHandleBarsHelper(ReactHelper.class)
         ).start(8080);
     }

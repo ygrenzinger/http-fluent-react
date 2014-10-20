@@ -55,3 +55,11 @@ var StocksComponent = React.createClass({
     )
   }
 });
+
+var renderStocks = function(values, orderBy, domElement){
+    if (typeof window == 'undefined') {
+        return React.renderComponentToString(StocksComponent({stocks: JSON.parse(values), orderBy:orderBy}));
+    } else {
+        return React.renderComponent(StocksComponent({stocks: JSON.parse(values), orderBy:orderBy}), domElement);
+    }
+};

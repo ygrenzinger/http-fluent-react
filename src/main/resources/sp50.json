@@ -1,0 +1,359 @@
+[
+    {
+        "sector": "Industrials",
+        "industry": "Industrial Conglomerates",
+        "symbol": "MMM",
+        "headquarters": "St Paul, Minnesota",
+        "company": "3M Co."
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Health Care Equipment & Services",
+        "symbol": "ABT",
+        "headquarters": "North Chicago, Illinois",
+        "company": "Abbott Laboratories"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Pharmaceuticals",
+        "symbol": "ABBV",
+        "headquarters": "North Chicago, Illinois",
+        "company": "AbbVie"
+    },
+    {
+        "sector": "Consumer Discretionary",
+        "industry": "Apparel, Accessories & Luxury Goods",
+        "symbol": "ANF",
+        "headquarters": "New Albany, Ohio",
+        "company": "Abercrombie & Fitch Company A"
+    },
+    {
+        "sector": "Financials",
+        "industry": "Property & Casualty Insurance",
+        "symbol": "ACE",
+        "headquarters": "Zurich, Switzerland",
+        "company": "ACE Limited"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "IT Consulting & Services",
+        "symbol": "ACN",
+        "headquarters": "Dublin, Ireland",
+        "company": "Accenture plc"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Pharmaceuticals",
+        "symbol": "ACT",
+        "headquarters": "Parsippany, New Jersey",
+        "company": "Actavis Inc"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Application Software",
+        "symbol": "ADBE",
+        "headquarters": "San Jose, California",
+        "company": "Adobe Systems Inc"
+    },
+    {
+        "sector": "Industrials",
+        "industry": "Diversified Commercial Services",
+        "symbol": "ADT",
+        "headquarters": "Boca Raton, Florida",
+        "company": "ADT Corp"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Semiconductors",
+        "symbol": "AMD",
+        "headquarters": "Sunnyvale, California",
+        "company": "Advanced Micro Devices"
+    },
+    {
+        "sector": "Utilities",
+        "industry": "Electric Utilities",
+        "symbol": "AES",
+        "headquarters": "Arlington, Virginia",
+        "company": "AES Corp"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Managed Health Care",
+        "symbol": "AET",
+        "headquarters": "Hartford, Connecticut",
+        "company": "Aetna Inc"
+    },
+    {
+        "sector": "Financials",
+        "industry": "Life & Health Insurance",
+        "symbol": "AFL",
+        "headquarters": "Columbus, Georgia",
+        "company": "AFLAC Inc"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Health Care Equipment & Services",
+        "symbol": "A",
+        "headquarters": "Santa Clara, California",
+        "company": "Agilent Technologies Inc"
+    },
+    {
+        "sector": "Utilities",
+        "industry": "Gas Utilities",
+        "symbol": "GAS",
+        "headquarters": "Atlanta, Georgia",
+        "company": "AGL Resources Inc."
+    },
+    {
+        "sector": "Materials",
+        "industry": "Industrial Gases",
+        "symbol": "APD",
+        "headquarters": "Allentown, Pennsylvania",
+        "company": "Air Products & Chemicals Inc"
+    },
+    {
+        "sector": "Materials",
+        "industry": "Industrial Gases",
+        "symbol": "ARG",
+        "headquarters": "Radnor, Pennsylvania",
+        "company": "Airgas Inc"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Internet Software & Services",
+        "symbol": "AKAM",
+        "headquarters": "Cambridge, Massachusetts",
+        "company": "Akamai Technologies Inc"
+    },
+    {
+        "sector": "Materials",
+        "industry": "Aluminum",
+        "symbol": "AA",
+        "headquarters": "New York, New York",
+        "company": "Alcoa Inc"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Biotechnology",
+        "symbol": "ALXN",
+        "headquarters": "Cheshire, Connecticut",
+        "company": "Alexion Pharmaceuticals"
+    },
+    {
+        "sector": "Materials",
+        "industry": "Diversified Metals & Mining",
+        "symbol": "ATI",
+        "headquarters": "Pittsburgh, Pennsylvania",
+        "company": "Allegheny Technologies Inc"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Pharmaceuticals",
+        "symbol": "AGN",
+        "headquarters": "Irvine, California",
+        "company": "Allergan Inc"
+    },
+    {
+        "sector": "Financials",
+        "industry": "Property & Casualty Insurance",
+        "symbol": "ALL",
+        "headquarters": "Northfield Township, Illinois",
+        "company": "Allstate Corp"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Semiconductors",
+        "symbol": "ALTR",
+        "headquarters": "San Jose, California",
+        "company": "Altera Corp"
+    },
+    {
+        "sector": "Consumer Staples",
+        "industry": "Tobacco",
+        "symbol": "MO",
+        "headquarters": "Richmond, Virginia",
+        "company": "Altria Group Inc"
+    },
+    {
+        "sector": "Consumer Discretionary",
+        "industry": "Internet Retail",
+        "symbol": "AMZN",
+        "headquarters": "Seattle, Washington",
+        "company": "Amazon.com Inc"
+    },
+    {
+        "sector": "Utilities",
+        "industry": "Multi-Utilities & Unregulated Power",
+        "symbol": "AEE",
+        "headquarters": "St. Louis, Missouri",
+        "company": "Ameren Corp"
+    },
+    {
+        "sector": "Utilities",
+        "industry": "Electric Utilities",
+        "symbol": "AEP",
+        "headquarters": "Columbus, Ohio",
+        "company": "American Electric Power"
+    },
+    {
+        "sector": "Financials",
+        "industry": "Consumer Finance",
+        "symbol": "AXP",
+        "headquarters": "New York, New York",
+        "company": "American Express Co"
+    },
+    {
+        "sector": "Financials",
+        "industry": "Property & Casualty Insurance",
+        "symbol": "AIG",
+        "headquarters": "New York, New York",
+        "company": "American Intl Group Inc"
+    },
+    {
+        "sector": "Financials",
+        "industry": "REITs",
+        "symbol": "AMT",
+        "headquarters": "Boston, Massachusetts",
+        "company": "American Tower Corp A"
+    },
+    {
+        "sector": "Financials",
+        "industry": "Diversified Financial Services",
+        "symbol": "AMP",
+        "headquarters": "Minneapolis, Minnesota",
+        "company": "Ameriprise Financial"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Health Care Distribution & Services",
+        "symbol": "ABC",
+        "headquarters": "Chesterbrook, Pennsylvania",
+        "company": "AmerisourceBergen Corp"
+    },
+    {
+        "sector": "Health Care",
+        "industry": "Biotechnology",
+        "symbol": "AMGN",
+        "headquarters": "Thousand Oaks, California",
+        "company": "Amgen Inc"
+    },
+    {
+        "sector": "Industrials",
+        "industry": "Electrical Components & Equipment",
+        "symbol": "APH",
+        "headquarters": "Wallingford, Connecticut",
+        "company": "Amphenol Corp A"
+    },
+    {
+        "sector": "Energy",
+        "industry": "Oil & Gas Exploration & Production",
+        "symbol": "APC",
+        "headquarters": "The Woodlands, Texas",
+        "company": "Anadarko Petroleum Corp"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Semiconductors",
+        "symbol": "ADI",
+        "headquarters": "Norwood, Massachusetts",
+        "company": "Analog Devices, Inc."
+    },
+    {
+        "sector": "Financials",
+        "industry": "Insurance Brokers",
+        "symbol": "AON",
+        "headquarters": "London, United Kingdom",
+        "company": "Aon plc"
+    },
+    {
+        "sector": "Energy",
+        "industry": "Oil & Gas Exploration & Production",
+        "symbol": "APA",
+        "headquarters": "Houston, Texas",
+        "company": "Apache Corporation"
+    },
+    {
+        "sector": "Financials",
+        "industry": "REITs",
+        "symbol": "AIV",
+        "headquarters": "Denver, Colorado",
+        "company": "Apartment Investment & Mgmt"
+    },
+    {
+        "sector": "Consumer Discretionary",
+        "industry": "Education",
+        "symbol": "APOL",
+        "headquarters": "Phoenix, Arizona",
+        "company": "Apollo Group Inc"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Computer Hardware",
+        "symbol": "AAPL",
+        "headquarters": "Cupertino, California",
+        "company": "Apple Inc."
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Semiconductor Equipment",
+        "symbol": "AMAT",
+        "headquarters": "Santa Clara, California",
+        "company": "Applied Materials Inc"
+    },
+    {
+        "sector": "Consumer Staples",
+        "industry": "Agricultural Products",
+        "symbol": "ADM",
+        "headquarters": "Decatur, Illinois",
+        "company": "Archer-Daniels-Midland Co"
+    },
+    {
+        "sector": "Financials",
+        "industry": "Multi-line Insurance",
+        "symbol": "AIZ",
+        "headquarters": "New York, New York",
+        "company": "Assurant Inc"
+    },
+    {
+        "sector": "Telecommunications Services",
+        "industry": "Integrated Telecommunications Services",
+        "symbol": "T",
+        "headquarters": "Dallas, Texas",
+        "company": "AT&T Inc"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Application Software",
+        "symbol": "ADSK",
+        "headquarters": "San Rafael, California",
+        "company": "Autodesk Inc"
+    },
+    {
+        "sector": "Information Technology",
+        "industry": "Internet Software & Services",
+        "symbol": "ADP",
+        "headquarters": "Roseland, New Jersey",
+        "company": "Automatic Data Processing"
+    },
+    {
+        "sector": "Consumer Discretionary",
+        "industry": "Specialty Stores",
+        "symbol": "AN",
+        "headquarters": "Fort Lauderdale, Florida",
+        "company": "AutoNation Inc"
+    },
+    {
+        "sector": "Consumer Discretionary",
+        "industry": "Specialty Stores",
+        "symbol": "AZO",
+        "headquarters": "Memphis, Tennessee",
+        "company": "AutoZone Inc"
+    },
+    {
+        "sector": "Financials",
+        "industry": "REITs",
+        "symbol": "AVB",
+        "headquarters": "Arlington, Virginia [1]",
+        "company": "AvalonBay Communities, Inc."
+    }
+] 
