@@ -18,7 +18,7 @@ var StockComponent = React.createClass({
         <div className="title">{this.props.stock.industry}</div>
         <div className="info">
           <div className="symbol">{this.props.stock.symbol}</div>
-          <div className="price">{this.props.stock.price}$</div>
+          <div className="price">{this.props.stock.price.toFixed(2)}$</div>
           <div className="variation">{this.props.stock.variation}</div>
         </div>
       </div>
