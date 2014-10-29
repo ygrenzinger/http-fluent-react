@@ -55,7 +55,7 @@ var StocksComponent = React.createClass({
     if (sortedStocks) {
       rows = sortedStocks.map(function(stock) {
         return (
-          <StockComponent stock={stock} />
+          <StockComponent key={stock.symbol} stock={stock} />
         );
       });
     }
@@ -72,10 +72,10 @@ var StocksComponent = React.createClass({
             <span>Sort by</span>
             <select name="orderBy" onChange={this.handleOrderByChange}>
                 /* remove option to remove this error: TypeError: null is not a function in at line number 6621 */
-                <option value="price">price</option>
-                <option value="variation">variation</option>
-                <option value="symbol">symbol</option>
-                <option value="company">company</option>
+                <option key="orderby-price" value="price">price</option>
+                <option key="orderby-variation" value="variation">variation</option>
+                <option key="orderby-symbol" value="symbol">symbol</option>
+                <option key="orderby-company" value="company">company</option>
             </select>
         </div>
 
