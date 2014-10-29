@@ -25,7 +25,7 @@ public class ReactServer {
 
     private final StockMarketIndex stockMarketIndex;
 
-    public static int numberOfStocksToDisplay = 150;
+    public static int numberOfStocksToDisplay = 50;
 
     public ReactServer() {
         stockMarketIndex = new StockMarketIndex(loadJsonSp500());
@@ -62,7 +62,7 @@ public class ReactServer {
         engine.eval("var global = this;");
 
         loadAndEvalScript("/META-INF/resources/webjars/react/0.11.2/react.min.js");
-        engine.eval("load('src/main/resources/app/react.js')");
+        //engine.eval("load('src/main/resources/app/react.js')");
         loadAndEvalScript("/META-INF/resources/webjars/lodash/2.4.1-6/lodash.min.js");
         loadAndEvalScript("/nashorn/utils.js");
         //loadAndEvalScript("/app/react/compiled/reactComponents.js");
@@ -76,7 +76,7 @@ public class ReactServer {
             Invocable invocable = (Invocable) engine;
             invocable.invokeFunction("print", "rendering react on the server");
             String data = getJsonStocks(numberOfStocksToDisplay);
-            Object result = invocable.invokeFunction("renderBug", null);
+            Object result = invocable.invokeFunction("renderStocks", data, null);
             return result.toString();
         } catch (Exception e) {
             e.printStackTrace();

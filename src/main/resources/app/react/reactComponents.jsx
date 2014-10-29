@@ -29,13 +29,19 @@ var StockComponent = React.createClass({
 var StocksComponent = React.createClass({
   displayName: 'StocksComponent',
   getInitialState: function() {
-    return {stocks: this.props.initialStocks};
+    return {
+        stocks: this.props.initialStock,
+        orderBy: 'symbol'
+    };
   },
   refreshData: function() {
     var component = this;
     $.get('/stocks', function( data ) {
         component.setState({stocks: JSON.parse(data)});
     });
+  },
+  handleOrderByChange: function(event) {
+    this.setState({orderBy: event.target.value});
   },
   componentDidMount: function() {
     this.refreshDataInterval = setInterval(this.refreshData, 1000);
@@ -44,7 +50,7 @@ var StocksComponent = React.createClass({
     clearInterval(this.refreshDataInterval);
   },
   render: function() {
-    var sortedStocks = _.sortBy(this.state.stocks, this.props.orderBy).reverse();
+    var sortedStocks = _.sortBy(this.state.stocks, this.state.orderBy).reverse();
     var rows = [];
     if (sortedStocks) {
       rows = sortedStocks.map(function(stock) {
@@ -54,17 +60,22 @@ var StocksComponent = React.createClass({
       });
     }
 
+/* doesn't handle any events :'(
     var options = ['price', 'variation', 'symbol', 'company'].map(function(opt, i) {
-        return <option key={i} value={opt} label={opt}>{opt}</option>;
+        return <span><input type="radio" name="orderBy" value={opt} onChange={this.handleChange}/>{opt}</span>;
     });
+*/
 
     return (
     <div>
         <div>
-        <span>Sort by</span>
-         <select name="orderBy">
-            {options}
-        </select>
+            <span>Sort by</span>
+            <select name="orderBy" onChange={this.handleOrderByChange}>
+                <option value="price">price</option>
+                <option value="variation">variation</option>
+                <option value="symbol">symbol</option>
+                <option value="company">company</option>
+            </select>
         </div>
 
         <div className="stocks">
@@ -77,42 +88,10 @@ var StocksComponent = React.createClass({
   }
 });
 
-
-
-var BugSelect = React.createClass({
-  displayName: 'BugSelect',
-  render: function() {
-
-    var options = ['price', 'variation', 'symbol', 'company'].map(function(opt, i) {
-        return <option key={i} value={opt} label={opt}>{opt}</option>;
-    });
-
-    return (
-      <div>
-<select value="B">
-    <option value="A">Apple</option>
-    <option value="B">Banana</option>
-    <option value="C">Cranberry</option>
-  </select>
-      </div>
-    );
-  }
-});
-
-var renderBug = function(domElement) {
+var renderStocks = function(values, domElement){
     if (typeof window == 'undefined') {
-        return React.renderToString(<BugSelect></BugSelect>);
+        return React.renderComponentToString(StocksComponent({initialStocks: JSON.parse(values)}));
     } else {
-        return React.render(<BugSelect></BugSelect>, domElement);
-    }
-
-}
-
-
-var renderStocks = function(values, orderBy, domElement){
-    if (typeof window == 'undefined') {
-        return React.renderComponentToString(StocksComponent({initialStocks: JSON.parse(values), orderBy:orderBy}));
-    } else {
-        return React.renderComponent(StocksComponent({initialStocks: JSON.parse(values), orderBy:orderBy}), domElement);
+        return React.renderComponent(StocksComponent({initialStocks: JSON.parse(values)}), domElement);
     }
 };
