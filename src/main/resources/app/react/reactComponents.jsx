@@ -30,7 +30,7 @@ var StocksComponent = React.createClass({
   displayName: 'StocksComponent',
   getInitialState: function() {
     return {
-        stocks: this.props.initialStock,
+        stocks: this.props.initialStocks,
         orderBy: 'symbol'
     };
   },
@@ -44,7 +44,7 @@ var StocksComponent = React.createClass({
     this.setState({orderBy: event.target.value});
   },
   componentDidMount: function() {
-    this.refreshDataInterval = setInterval(this.refreshData, 1000);
+    this.refreshDataInterval = setInterval(this.refreshData, 10 * 1000);
   },
   componentWillUnmount: function() {
     clearInterval(this.refreshDataInterval);
@@ -71,10 +71,12 @@ var StocksComponent = React.createClass({
         <div>
             <span>Sort by</span>
             <select name="orderBy" onChange={this.handleOrderByChange}>
+                /* uncomment this bloc to have this error: TypeError: null is not a function in at line number 6621
                 <option value="price">price</option>
                 <option value="variation">variation</option>
                 <option value="symbol">symbol</option>
                 <option value="company">company</option>
+                */
             </select>
         </div>
 

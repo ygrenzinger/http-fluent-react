@@ -61,7 +61,7 @@ public class ReactServer {
     private void initJS() throws ScriptException, IOException {
         engine.eval("var global = this;");
 
-        loadAndEvalScript("/META-INF/resources/webjars/react/0.11.2/react.min.js");
+        loadAndEvalScript("/META-INF/resources/webjars/react/0.11.2/react.js");
         //engine.eval("load('src/main/resources/app/react.js')");
         loadAndEvalScript("/META-INF/resources/webjars/lodash/2.4.1-6/lodash.min.js");
         loadAndEvalScript("/nashorn/utils.js");
