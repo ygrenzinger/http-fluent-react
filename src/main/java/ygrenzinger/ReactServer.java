@@ -62,9 +62,11 @@ public class ReactServer {
         engine.eval("var global = this;");
 
         loadAndEvalScript("/META-INF/resources/webjars/react/0.11.2/react.min.js");
+        engine.eval("load('src/main/resources/app/react.js')");
         loadAndEvalScript("/META-INF/resources/webjars/lodash/2.4.1-6/lodash.min.js");
         loadAndEvalScript("/nashorn/utils.js");
-        loadAndEvalScript("/app/react/compiled/reactComponents.js");
+        //loadAndEvalScript("/app/react/compiled/reactComponents.js");
+        engine.eval("load('src/main/resources/app/react/compiled/reactComponents.js')");
 
         engine.eval("var print = function(value) { console.log(value) };");
     }
@@ -74,7 +76,7 @@ public class ReactServer {
             Invocable invocable = (Invocable) engine;
             invocable.invokeFunction("print", "rendering react on the server");
             String data = getJsonStocks(numberOfStocksToDisplay);
-            Object result = invocable.invokeFunction("renderStocks", data, "symbol", null);
+            Object result = invocable.invokeFunction("renderBug", null);
             return result.toString();
         } catch (Exception e) {
             e.printStackTrace();

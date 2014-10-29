@@ -28,38 +28,91 @@ var StockComponent = React.createClass({
 
 var StocksComponent = React.createClass({
   displayName: 'StocksComponent',
+  getInitialState: function() {
+    return {stocks: this.props.initialStocks};
+  },
+  refreshData: function() {
+    var component = this;
+    $.get('/stocks', function( data ) {
+        component.setState({stocks: JSON.parse(data)});
+    });
+  },
+  componentDidMount: function() {
+    this.refreshDataInterval = setInterval(this.refreshData, 1000);
+  },
+  componentWillUnmount: function() {
+    clearInterval(this.refreshDataInterval);
+  },
   render: function() {
-    var stocks = this.props.stocks;
-    stocks = _.sortBy(stocks, this.props.orderBy).reverse();
+    var sortedStocks = _.sortBy(this.state.stocks, this.props.orderBy).reverse();
     var rows = [];
-    if (stocks) {
-      rows = stocks.map(function(stock) {
-
-        var clickHandler = function(ev) {
-          //console.log("Still in reactJs");
-          //console.log(ev);
-        };
-
+    if (sortedStocks) {
+      rows = sortedStocks.map(function(stock) {
         return (
           <StockComponent stock={stock} />
         );
       });
     }
 
+    var options = ['price', 'variation', 'symbol', 'company'].map(function(opt, i) {
+        return <option key={i} value={opt} label={opt}>{opt}</option>;
+    });
+
     return (
-      <div className="stocks">
+    <div>
+        <div>
+        <span>Sort by</span>
+         <select name="orderBy">
+            {options}
+        </select>
+        </div>
+
+        <div className="stocks">
         {
           rows
         }
+        </div>
       </div>
-    )
+    );
   }
 });
 
+
+
+var BugSelect = React.createClass({
+  displayName: 'BugSelect',
+  render: function() {
+
+    var options = ['price', 'variation', 'symbol', 'company'].map(function(opt, i) {
+        return <option key={i} value={opt} label={opt}>{opt}</option>;
+    });
+
+    return (
+      <div>
+<select value="B">
+    <option value="A">Apple</option>
+    <option value="B">Banana</option>
+    <option value="C">Cranberry</option>
+  </select>
+      </div>
+    );
+  }
+});
+
+var renderBug = function(domElement) {
+    if (typeof window == 'undefined') {
+        return React.renderToString(<BugSelect></BugSelect>);
+    } else {
+        return React.render(<BugSelect></BugSelect>, domElement);
+    }
+
+}
+
+
 var renderStocks = function(values, orderBy, domElement){
     if (typeof window == 'undefined') {
-        return React.renderComponentToString(StocksComponent({stocks: JSON.parse(values), orderBy:orderBy}));
+        return React.renderComponentToString(StocksComponent({initialStocks: JSON.parse(values), orderBy:orderBy}));
     } else {
-        return React.renderComponent(StocksComponent({stocks: JSON.parse(values), orderBy:orderBy}), domElement);
+        return React.renderComponent(StocksComponent({initialStocks: JSON.parse(values), orderBy:orderBy}), domElement);
     }
 };
